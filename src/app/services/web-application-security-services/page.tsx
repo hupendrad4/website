@@ -244,7 +244,7 @@ export default function WebApplicationSecurityServicesPage() {
         </div>
         {/* Cards */}
         <div className="flex flex-wrap justify-center gap-8 mb-8 w-full max-w-6xl">
-          {heroCards.map((card, i) => (
+          {heroCards.map((card) => (
             <div
               key={card.title}
               className={`
@@ -301,7 +301,7 @@ export default function WebApplicationSecurityServicesPage() {
 
         {/* Feature Cards */}
         <div className="w-full flex flex-wrap gap-6 justify-center mb-14">
-          {securityFeatures.map((f, idx) => (
+          {securityFeatures.map((f) => (
             <div
               key={f.title}
               className={`

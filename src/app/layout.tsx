@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 // import { FaPhone, FaWhatsapp } from "react-icons/fa";
 import FloatingButtons from "./components/FloatingButtons";
-
-
+import Image from "next/image";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.quoriumtechnologies.com"),
@@ -122,9 +121,10 @@ export default function RootLayout({
         <FloatingButtons />
         <footer className="relative w-full bg-[#00004d] text-white pt-10 px-4 mt-12 overflow-hidden">
           {/* Background Image as cover */}
-          <img
+          <Image
             src="/images/footer1.jpg"
             alt="Footer background"
+            fill
             className="absolute inset-0 w-full h-full object-cover object-center z-0"
             style={{ opacity: 0.45 }}
           />

@@ -294,7 +294,13 @@ export default function SoftwareTestingServicesPage() {
                 boxShadow: "0 12px 40px 0 rgba(60,30,110,0.10)",
               }}>
               <div className="relative w-28 h-28 mb-4 rounded-full overflow-hidden border-4 border-[#f7e8ff] shadow-lg">
-                <img src={cap.img} alt={cap.title} className="object-cover w-full h-full scale-110" />
+                <Image
+                  src={cap.img}
+                  alt={cap.title}
+                  width={112}
+                  height={112}
+                  className="object-cover w-full h-full scale-110 rounded-full"
+                />
                 <div className="absolute bottom-1 right-1 bg-white/90 p-2 rounded-full shadow-lg">{cap.icon}</div>
               </div>
               <h4 className="font-bold text-[#181F4B] text-xl mb-2 text-center">{cap.title}</h4>
@@ -323,4 +329,3 @@ export default function SoftwareTestingServicesPage() {
     </div>
   );
 }
-

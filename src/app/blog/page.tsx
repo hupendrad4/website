@@ -87,17 +87,29 @@ type Blog = {
   category?: string;
 };
 
+type BlogPost = {
+  title: string;
+  content: string;
+  image: string;
+  url: string;
+  date: string;
+};
+
 function BlogCarousel({ blogs }: { blogs: Blog[] }) {
   const [visibleStart, setVisibleStart] = useState(0);
   const visibleCount = 3;
-  const intervalRef = useRef();
+const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setVisibleStart((prev) => (prev + 1) % blogs.length);
-    }, 5200);
-    return () => clearInterval(intervalRef.current);
-  }, [blogs.length]);
+useEffect(() => {
+  intervalRef.current = setInterval(() => {
+    setVisibleStart((prev) => (prev + 1) % blogs.length);
+  }, 5200);
+
+  return () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
+}, [blogs.length]);
+
 
   function getVisibleBlogs() {
     if (blogs.length <= visibleCount) return blogs;
@@ -171,34 +183,42 @@ function BlogCarousel({ blogs }: { blogs: Blog[] }) {
 }
 
 // --- Blog Submission Form ---
-function CreateBlogForm({ onAddBlog }) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+function CreateBlogForm({ onAddBlog }: { onAddBlog: (blog: BlogPost) => void }) {
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
-  function handleImageChange(e) {
+  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
       setImage(e.target.files[0]);
       setImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   }
-  function handleSubmit(e) {
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!title || !content || !image) return;
-    const newBlog = {
+    if (!title || !content || !image || !imagePreview) return;
+
+    const newBlog: BlogPost = {
       title,
       content,
       image: imagePreview,
       url: "#",
-      date: new Date().toISOString().split("T")[0]
+      date: new Date().toISOString().split("T")[0],
     };
+
     onAddBlog(newBlog);
     setSubmitted(true);
-    setTitle(""); setContent(""); setImage(null); setImagePreview(null);
+    setTitle("");
+    setContent("");
+    setImage(null);
+    setImagePreview(null);
+
     setTimeout(() => setSubmitted(false), 2000);
   }
+
   return (
     <form className="flex flex-col gap-5" onSubmit={handleSubmit} autoComplete="off">
       <input
@@ -224,9 +244,11 @@ function CreateBlogForm({ onAddBlog }) {
         />
       </label>
       {imagePreview && (
-        <img
+        <Image
           src={imagePreview}
           alt="Preview"
+          width={160}
+          height={128}
           className="w-40 h-32 object-cover rounded-xl border mx-auto"
         />
       )}
@@ -250,7 +272,7 @@ function CreateBlogForm({ onAddBlog }) {
 export default function BlogPage() {
   // Blog Submission (User blog) logic
   const [blogs, setBlogs] = useState(FEATURED_BLOGS);
-  function handleAddBlog(newBlog) {
+  function handleAddBlog(newBlog: BlogPost) {
     setBlogs(prev => [
       { ...newBlog, id: Date.now() },
       ...prev,
@@ -454,4 +476,3 @@ export default function BlogPage() {
     </main>
   );
 }
-

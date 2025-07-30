@@ -207,7 +207,13 @@ export default function MobileApplicationDevelopmentPage() {
                 `}
               >
                 <div className="absolute -top-10 right-6">
-                  <img src={phase.img} alt={phase.title} className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-lg  group-hover:blur-0 transition-all duration-300" />
+                  <Image
+                    src={phase.img}
+                    alt={phase.title}
+                    width={80}
+                    height={80}
+                    className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-lg  group-hover:blur-0 transition-all duration-300"
+                  />
                 </div>
                 <div className="flex flex-col items-center gap-2">
                   {phase.icon}
@@ -218,9 +224,11 @@ export default function MobileApplicationDevelopmentPage() {
             ))}
           </div>
           <div className="flex-1 flex flex-col items-center gap-10">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=480&q=80"
               alt="Mobile App Journey"
+              width={400}
+              height={400}
               className="w-[400px] h-[400px] object-cover rounded-full shadow-[0_8px_64px_#6d42c755] border-4 border-white bg-white/60 mb-8 animate-fade-in"
             />
             <div className="bg-white/95 rounded-2xl p-7 shadow-xl flex flex-col gap-3 w-full max-w-sm">
@@ -288,4 +296,3 @@ export default function MobileApplicationDevelopmentPage() {
     </div>
   );
 }
-

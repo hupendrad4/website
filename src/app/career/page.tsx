@@ -50,7 +50,7 @@ const JOBS = [
 export default function CareerPage() {
   const [jobs] = useState(JOBS);
   const [search, setSearch] = useState("");
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [selectedJob, setSelectedJob] = useState<null | typeof JOBS[0]>(null);
 
   // Filter jobs by search
   const filteredJobs = jobs.filter((job) =>
