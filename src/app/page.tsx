@@ -23,7 +23,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import HeroSection from "./components/Jumbotron";
 import MobileNavbar from "./components/MobileNavbar";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 
 
 // ======= Proud Numbers / Stats =======
@@ -131,12 +131,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#3D3D3D] text-secondary font-sans">
-    <div className="md:hidden">
-      <MobileNavbar />
-    </div>
-<div className="hidden md:block">
-  <Navbar />
-</div>
+
+
 
       {/* Hero Section */}
       <HeroSection />
