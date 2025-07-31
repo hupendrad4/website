@@ -22,7 +22,7 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 import HeroSection from "./components/Jumbotron";
-import MobileNavbar from "./components/MobileNavbar";
+// import MobileNavbar from "./components/MobileNavbar";
 // import Navbar from "./components/Navbar";
 
 
